@@ -117,7 +117,13 @@ static void DisplayImage(cv::Mat const& image, double par) {
             map_y.at<float>(y, x) = to_y;
         }
     }
-    cv::remap(image, screen_image, map_x, map_y, cv::INTER_CUBIC);
+    cv::remap(image, screen_image, map_x, map_y,
+        scale > 1 && scale * (par*2) > 1 ?
+            cv::INTER_AREA :
+        scale < 0.5 && scale * (par*2) < 0.5 ?
+            cv::INTER_LANCZOS4 :
+            cv::INTER_CUBIC
+    );
     std::cout << "\x1b[40m\x1b[2J";
     for(size_t y = 0; y < rows/2; ++y) {
         std::cout << "\x1b[" << (y+1) << "H";
