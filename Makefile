@@ -1,5 +1,5 @@
-CXXFLAGS+=`pkg-config --cflags opencv`
-LIBS+=`pkg-config --libs opencv`
+CXXFLAGS+=`pkg-config --cflags opencv4`
+LIBS+=`pkg-config --libs opencv4`
 
 .PHONY: all clean
 
